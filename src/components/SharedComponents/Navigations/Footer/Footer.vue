@@ -2,7 +2,7 @@
   <q-footer style="background: #121212">
     <div>
       <q-toolbar>
-        <q-toolbar-title class="flex flex-center">
+        <q-toolbar-title class="row justify-center">
           © {{ new Date().getFullYear() }} Movie App. All rights reserved.</q-toolbar-title
         >
       </q-toolbar>

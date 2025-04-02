@@ -6,9 +6,10 @@ const routes = [
   },
   {
     path: '/details/:id',
-    name: 'movie-detail',
     component: () => import('src/layouts/Default.vue'),
-    children: [{ path: '', component: () => import('src/pages/MovieDetail.vue') }]
+    children: [
+      { path: '', component: () => import('src/pages/MovieDetail.vue'), name: 'movie-detail' }
+    ]
   },
   // Always leave this as last one,
   // but you can also remove it
