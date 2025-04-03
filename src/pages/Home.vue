@@ -11,9 +11,14 @@ import { movieService } from 'src/services';
 import { Loading } from 'quasar';
 defineOptions({
   name: 'HomePage',
-  async preFetch({ currentRoute }) {
+  async preFetch({ currentRoute, redirect }) {
     const movieStore = useMovieStore();
     const filters = currentRoute.query;
+
+    if (Object.keys(filters).length === 0) {
+      return redirect('/?page=1&sort_by=popularity.desc');
+    }
+
     Loading.show();
 
     try {

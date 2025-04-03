@@ -10,6 +10,19 @@ const options = {
 };
 
 export default {
+  async getMovieGenres() {
+    const params = '/3/genre/movie/list';
+    const query = '?language=en-US';
+    const response = await fetch(`${url}${params}${query}`, options);
+
+    if (!response.ok) {
+      throw new Error('Could not fetch movie details!');
+    }
+
+    const data = await response.json();
+
+    return data;
+  },
   async getMovieDetails(id) {
     const params = `/3/movie/${id}`;
     const query = '?language=en-US';
@@ -37,8 +50,12 @@ export default {
     return data;
   },
   async searchMoviesByFilters(filters) {
+    const urlQueries = Object.entries(filters)
+      .map((e) => e.join('='))
+      .join('&');
+
     const params = '/3/discover/movie';
-    const query = `?include_adult=false&include_video=false&language=en-US&${filters}`;
+    const query = `?include_adult=false&include_video=false&language=en-US&${urlQueries}`;
     const response = await fetch(`${url}${params}${query}`, options);
 
     if (!response.ok) {

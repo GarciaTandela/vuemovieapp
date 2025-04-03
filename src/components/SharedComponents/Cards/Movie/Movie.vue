@@ -6,13 +6,13 @@
   >
     <q-img :src="movie.image" no-native-menu :style="cardImageStyle">
       <q-icon
-        v-if="isFavorite"
+        v-if="movie.isFavorite"
         class="absolute all-pointer-events"
         size="32px"
         name="mdi-heart"
         color="red"
         style="top: 8px; right: 8px"
-        @click.stop="removeFavorite"
+        @click.stop="removeFavorite(movie)"
       >
         <q-tooltip style="font-size: 13px"> Remove favorite </q-tooltip>
       </q-icon>
@@ -24,7 +24,7 @@
         name="mdi-heart-outline"
         color="white"
         style="top: 8px; right: 8px"
-        @click.stop="saveFavorite"
+        @click.stop="saveFavorite(movie)"
       >
         <q-tooltip style="font-size: 13px"> Save favorite </q-tooltip>
       </q-icon>
@@ -32,7 +32,6 @@
 
     <q-card-section>
       <div class="text-h6 text-dark ellipsis">{{ movie.title }}</div>
-      <!-- <div class="text-subtitle2 text-dark">by John Doe</div> -->
     </q-card-section>
 
     <q-card-section class="q-pt-none text-dark">
@@ -43,7 +42,8 @@
 
 <script setup>
 import { useRouter } from 'vue-router';
-import { ref, computed } from 'vue';
+import { computed, onBeforeMount } from 'vue';
+import useMovieStore from 'src/stores/movie';
 
 const props = defineProps({
   movie: {
@@ -66,8 +66,8 @@ const props = defineProps({
 });
 
 const router = useRouter();
-const isFavorite = ref(false);
-
+const movieStore = useMovieStore();
+const favoritesMovies = movieStore.favoritesMovies;
 const movie = computed(() => {
   return props.movie;
 });
@@ -85,17 +85,27 @@ const goToMovieDetailPage = (id, genreIds) => {
   router.push(`/details/${id}?genreIds=${genreIdsString}`);
 };
 
-const saveFavorite = () => {
-  // Logic to save the movie as a favorite
-  isFavorite.value = true;
-  console.log('Movie saved as favorite!');
+const saveFavorite = (data) => {
+  movie.value.isFavorite = true;
+  favoritesMovies.push(data);
+  window.localStorage.setItem('FavoritesMovies', JSON.stringify(favoritesMovies));
 };
 
-const removeFavorite = () => {
-  // Logic to remove the movie from favorites
-  isFavorite.value = false;
-  console.log('Movie removed from favorites!');
+const removeFavorite = (data) => {
+  movie.value.isFavorite = false;
+  const position = favoritesMovies.findIndex((favorite) => favorite.id === data.id);
+  favoritesMovies.splice(position, 1);
+  window.localStorage.setItem('FavoritesMovies', JSON.stringify(favoritesMovies));
 };
+
+onBeforeMount(() => {
+  if (favoritesMovies.length > 0) {
+    const movieIndex = favoritesMovies.findIndex((favorite) => favorite.id === movie.value.id);
+    if (movieIndex !== -1) {
+      movie.value.isFavorite = true;
+    }
+  }
+});
 
 defineOptions({
   name: 'MovieCard'

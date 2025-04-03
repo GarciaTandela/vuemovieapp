@@ -44,8 +44,7 @@
   </div>
 
   <div :class="{ 'container-lg': utils.gt.md }" style="margin-top: 130px">
-    <h4>Related Movies</h4>
-    <RelatedMovies class="q-mt-lg" :movies="movieStore.relatedMovies"></RelatedMovies>
+    <RelatedMovies :movies="movieStore.relatedMovies"></RelatedMovies>
   </div>
 </template>
 

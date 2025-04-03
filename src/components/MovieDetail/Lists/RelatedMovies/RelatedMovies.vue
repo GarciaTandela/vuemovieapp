@@ -1,5 +1,11 @@
 <template>
-  <section>
+  <div class="row items-center">
+    <h4>Related Movies</h4>
+    <q-space></q-space>
+    <q-icon class="q-mr-sm" name="mdi-arrow-left-circle-outline" size="md" />
+    <q-icon name="mdi-arrow-right-circle-outline" size="md" @click="$refs.myVueperSlides.next()" />
+  </div>
+  <section class="q-mt-lg">
     <vueper-slides
       class="no-shadow"
       :visible-slides="4"
@@ -7,6 +13,7 @@
       :gap="2"
       :dragging-distance="200"
       fixedHeight="580px"
+      ref="myVueperSlides"
       :breakpoints="{
         800: {
           fixedHeight: '800px',
@@ -15,7 +22,7 @@
           gap: 0
         }
       }"
-      :bullets="true"
+      :bullets="false"
       :arrows="false"
       arrows-outside
     >
@@ -70,7 +77,11 @@ const cardContentStyle = computed(() => {
     return desktopStyle;
   }
 
-  return mobileStyle;
+  if (utils.lt.sm) {
+    return mobileStyle;
+  }
+
+  return {};
 });
 
 const cardImageStyle = computed(() => {
@@ -90,7 +101,11 @@ const cardImageStyle = computed(() => {
     return desktopStyle;
   }
 
-  return mobileStyle;
+  if (utils.lt.sm) {
+    return mobileStyle;
+  }
+
+  return {};
 });
 
 defineOptions({

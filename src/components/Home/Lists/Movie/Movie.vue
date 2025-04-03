@@ -1,12 +1,14 @@
 <template>
   <div class="row q-col-gutter-lg">
-    <div class="col-12 col-md-3 q-mb-md" v-for="(movie, index) in movies" :key="index">
-      <MovieCard
-        :movie="movie"
-        :cardContentStyle="cardContentStyle"
-        :cardImageStyle="cardImageStyle"
-      ></MovieCard>
-    </div>
+    <template v-for="(movie, index) in movies" :key="index">
+      <div v-if="movie.visible" class="col-12 col-sm-6 col-lg-3 q-mb-md">
+        <MovieCard
+          :movie="movie"
+          :cardContentStyle="cardContentStyle"
+          :cardImageStyle="cardImageStyle"
+        ></MovieCard>
+      </div>
+    </template>
   </div>
 </template>
 
@@ -14,6 +16,7 @@
 import MovieCard from 'src/components/SharedComponents/Cards/Movie/Movie.vue';
 import { computed } from 'vue';
 import { useQuasar } from 'quasar';
+import usePreferencesStore from 'src/stores/preferences';
 
 const props = defineProps({
   movies: {
@@ -24,9 +27,10 @@ const props = defineProps({
 
 const $q = useQuasar();
 const utils = $q.screen;
+const preferencesStore = usePreferencesStore();
 
 const movies = computed(() => {
-  return props.movies;
+  return props.movies.slice(0, preferencesStore.itemsPerPage);
 });
 
 const cardContentStyle = computed(() => {
