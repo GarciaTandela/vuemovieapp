@@ -1,40 +1,58 @@
 # Vue Movie App (vuemovieapp)
 
-Vue movie app challenge
+Vue Movie App Challenge
+
+```bash
+Use Node JS Version 22.14.0
+```
 
 ## Install the dependencies
+
 ```bash
-yarn
-# or
+npm i -g @quasar/cli
 npm install
 ```
 
 ### Start the app in development mode (hot-code reloading, error reporting, etc.)
+
 ```bash
-quasar dev
+quasar dev or npm run dev
 ```
 
-
 ### Lint the files
+
 ```bash
-yarn lint
-# or
 npm run lint
 ```
 
-
 ### Format the files
+
 ```bash
-yarn format
-# or
 npm run format
 ```
 
+### Run tests
 
-### Build the app for production
 ```bash
-quasar build
+npm run test:unit
 ```
 
-### Customize the configuration
-See [Configuring quasar.config.js](https://v2.quasar.dev/quasar-cli-vite/quasar-config-js).
+### Run tests in UI
+
+```bash
+npm run test:unit:ui
+```
+
+## Features in the project
+
+- Listing Movies
+- Pagination for movies
+- Save, remove and listing movies favorites
+- Change items per page in Search Movies
+- Movie Details
+- Listing related movies in Movie Details
+- Responsiveness in other devices
+- Tests included
+- Search by movie title, description
+- Filter by criteria Date, Genre
+- Sort by functionality

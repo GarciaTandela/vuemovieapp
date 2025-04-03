@@ -13,9 +13,9 @@ describe('example Component', () => {
         totalCount: 4,
         todos: [
           { id: 1, content: 'Hallo' },
-          { id: 2, content: 'Hoi' },
-        ],
-      },
+          { id: 2, content: 'Hoi' }
+        ]
+      }
     });
     expect(wrapper.vm.clickCount).toBe(0);
     await wrapper.find('.q-item').trigger('click');
@@ -26,8 +26,8 @@ describe('example Component', () => {
     const wrapper = mount(ExampleComponent, {
       props: {
         title: 'Hello',
-        totalCount: 4,
-      },
+        totalCount: 4
+      }
     });
     expect(wrapper.findAll('.q-item')).toHaveLength(0);
   });
