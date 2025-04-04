@@ -56,7 +56,9 @@ export default defineConfig((ctx) => {
 
       // publicPath: '/',
       // analyze: true,
-      // env: {},
+      env: {
+        token: process.env.TOKEN || ''
+      },
       // rawDefine: {}
       // ignorePublicFolder: true,
       // minify: false,
