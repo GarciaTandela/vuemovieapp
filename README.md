@@ -6,6 +6,14 @@ Vue Movie App Challenge
 Use Node JS Version 22.14.0
 ```
 
+## TMDb API Account
+
+1. Create an API account in TMDb: https://www.themoviedb.org
+2. Get your token from TMDb in order to use the application and make requests
+3. Create a env file in the project with the following name: .env.local
+4. Inside your env file put the following value: TOKEN=Bearer <your_token>
+5. Note: It's essential to have your own token in order to the app work properly
+
 ## Install the dependencies
 
 ```bash

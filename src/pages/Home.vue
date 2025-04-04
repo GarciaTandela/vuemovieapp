@@ -24,6 +24,7 @@ defineOptions({
     try {
       const movies = await movieService.searchMoviesByFilters(filters);
       movieStore.setMovies(movies);
+      console.log(process.env.TOKEN);
     } catch (error) {
       console.log(error);
     } finally {
